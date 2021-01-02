@@ -1,0 +1,8 @@
+name: iqual progressive decoupler rest block
+description: REST Block for decoupling
+package: Custom
+type: module
+core: 8.x
+dependencies:
+  - iq_progressive_decoupler:iq_progressive_decoupler
+  - drupal:hal
