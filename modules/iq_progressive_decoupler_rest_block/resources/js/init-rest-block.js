@@ -6,7 +6,7 @@
       var pattern = drupalSettings.progressive_decoupler[blockId].ui_pattern;
       $.get(drupalSettings.progressive_decoupler[blockId].api_endpoint, function(response){
         response.forEach(function(item){
-          var $item = $(template.render(response));
+          var $item = $(template.render(item));
           $(document).trigger('iq-progressive-decoupler-after-item-rendered[' + pattern + ']', $item);
           $target.append($item);
         });
