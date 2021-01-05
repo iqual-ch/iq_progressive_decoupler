@@ -6,6 +6,7 @@ initialize:
   js:
     //cdnjs.cloudflare.com/ajax/libs/twig.js/0.8.9/twig.min.js: { type: external, minified: true }
     resources/js/twig-functions.js: {}
+    resources/js/fieldmapper.js: {}
     resources/js/init.js: {}
   dependencies:
     - core/jquery

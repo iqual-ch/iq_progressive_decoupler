@@ -7,6 +7,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\ui_patterns\UiPatternsManager;
+use Drupal\Component\Serialization\Yaml;
+use Symfony\Component\Yaml\Yaml as YamlParser;
+use Drupal\Component\Serialization\Yaml as YamlSerializer;
 
 /**
  * Base block for decoupling.
@@ -63,6 +66,13 @@ class DecoupledBlockBase extends BlockBase implements ContainerFactoryPluginInte
       '#default_value' => isset($this->configuration['ui_pattern']) ? $this->configuration['ui_pattern'] : NULL,
       '#required' => TRUE,
     ];
+
+    $form['field_mapping'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Field mapping'),
+      '#default_value' => isset($this->configuration['field_mapping']) ? Yaml::decode($this->configuration['field_mapping']) : NULL,
+    ];
+
     return $form;
   }
 
@@ -82,7 +92,12 @@ class DecoupledBlockBase extends BlockBase implements ContainerFactoryPluginInte
     $build['#attached']['drupalSettings']['progressive_decoupler'][$this->configuration['block_id']] = [
       'template' => \file_get_contents($pattern['base path'] . '/' . $pattern['template'] . '.html.twig'),
       'ui_pattern' => $this->configuration['ui_pattern'],
+      'type' => $this->getPluginId(),
     ];
+
+    if (isset($this->configuration['field_mapping'])) {
+      $build['#attached']['drupalSettings']['progressive_decoupler'][$this->configuration['block_id']]['field_mapping'] = YamlParser::parse(YamlSerializer::decode($this->configuration['field_mapping']));
+    }
 
     return $build;
 
@@ -95,6 +110,7 @@ class DecoupledBlockBase extends BlockBase implements ContainerFactoryPluginInte
     parent::blockSubmit($form, $form_state);
     $this->configuration['ui_pattern'] = $form_state->getValue('ui_pattern');
     $this->configuration['block_id'] = str_replace('_', '-', 'block-' . $form['id']['#default_value']);
+    $this->configuration['field_mapping'] = Yaml::encode($form_state->getValue('field_mapping'));
   }
 
 }
