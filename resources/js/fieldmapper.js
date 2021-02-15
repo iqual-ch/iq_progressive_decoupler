@@ -6,7 +6,7 @@
  * @param {Object} mapping  - object containing the mapping
  */
 
-iq_progessive_decoupler_FieldMapper = function (item, mapping) {
+iq_progressive_decoupler_FieldMapper = function (item, mapping) {
   var self = this;
   self.item = item;
   self.mapping = mapping;

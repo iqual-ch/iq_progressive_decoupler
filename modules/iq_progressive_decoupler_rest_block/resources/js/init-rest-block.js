@@ -7,7 +7,7 @@
       let pattern = blockData.ui_pattern;
       $.get(blockData.api_endpoint, function(response){
         response.forEach(function(item){
-          let fieldMapper = new iq_progessive_decoupler_FieldMapper(item, blockData.field_mapping);
+          let fieldMapper = new iq_progressive_decoupler_FieldMapper(item, blockData.field_mapping);
           let $item = $(template.render(fieldMapper.applyMappging()));
           $(document).trigger('iq-progressive-decoupler-after-item-rendered[' + pattern + ']', $item);
           $target.append($item);
