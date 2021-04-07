@@ -22,7 +22,6 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
     return output;
   };
 
-
   /**
    * Apply mapping to item
    */
@@ -31,13 +30,31 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
       return mapping.value;
     }
     if (mapping.type == 'array') {
-      var arrayItem = eval(mapping.value);
+      var arrayItem = self.getObjectValueByPath(item, mapping.value);
       arrayItem = arrayItem.map(function(item){
         return self.applyMappging(item, mapping.mapping);
       });
       return arrayItem;
     }
-    return eval(mapping.value);
+    return self.getObjectValueByPath(item, mapping.value);
   };
+
+  /**
+   * Read object value form path
+   */
+  self.getObjectValueByPath = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1');
+    s = s.replace(/^\./, '');
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
+  }
 
 }
