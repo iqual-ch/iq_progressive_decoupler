@@ -23,7 +23,7 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
   };
 
   /**
-   * Apply mapping to item
+   * Map all of the item's fields to values
    */
   self.mapField = function (item, mapping) {
     if (mapping.type == 'static') {
@@ -36,7 +36,13 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
       });
       return arrayItem;
     }
-    return self.getObjectValueByPath(item, mapping.value);
+
+    if (self.getObjectValueByPath(item, mapping.value)) {
+      return self.getObjectValueByPath(item, mapping.value);
+    }
+
+    return self.getObjectValueByPath(item, mapping.fallback);
+
   };
 
   /**
