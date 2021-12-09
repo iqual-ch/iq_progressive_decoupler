@@ -54,7 +54,7 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
     var a = s.split('.');
     for (var i = 0, n = a.length; i < n; ++i) {
         var k = a[i];
-        if (k in o) {
+        if (o && k && k in o) {
             o = o[k];
         } else {
             return;
