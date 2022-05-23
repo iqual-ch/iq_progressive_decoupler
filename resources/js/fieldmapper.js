@@ -6,7 +6,7 @@
  * @param {Object} mapping  - object containing the mapping
  */
 
-iq_progressive_decoupler_FieldMapper = function (item, mapping) {
+ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
   var self = this;
   self.item = item;
   self.mapping = mapping;
@@ -41,8 +41,11 @@ iq_progressive_decoupler_FieldMapper = function (item, mapping) {
       return self.getObjectValueByPath(item, mapping.value);
     }
 
-    return self.getObjectValueByPath(item, mapping.fallback);
+    if (mapping.fallback) {
+      return self.getObjectValueByPath(item, mapping.fallback);
+    }
 
+    return '';
   };
 
   /**
