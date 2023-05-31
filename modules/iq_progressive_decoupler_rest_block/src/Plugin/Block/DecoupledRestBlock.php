@@ -23,7 +23,7 @@ class DecoupledRestBlock extends DecoupledBlockBase {
     $form['api_endpoint'] = [
       '#type' => 'textfield',
       '#title' => $this->t('API endpoint'),
-      '#default_value' => isset($this->configuration['api_endpoint']) ? $this->configuration['api_endpoint'] : '',
+      '#default_value' => $this->configuration['api_endpoint'] ?? '',
       '#required' => TRUE,
     ];
     return $form;

@@ -11,4 +11,3 @@ initialize:
   dependencies:
     - core/jquery
     - core/drupal
-

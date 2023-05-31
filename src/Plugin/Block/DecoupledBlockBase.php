@@ -63,7 +63,7 @@ class DecoupledBlockBase extends BlockBase implements ContainerFactoryPluginInte
       '#empty_value' => '_none',
       '#title' => $this->t('Pattern'),
       '#options' => $this->patternsManager->getPatternsOptions(),
-      '#default_value' => isset($this->configuration['ui_pattern']) ? $this->configuration['ui_pattern'] : NULL,
+      '#default_value' => $this->configuration['ui_pattern'] ?? NULL,
       '#required' => TRUE,
     ];
 
