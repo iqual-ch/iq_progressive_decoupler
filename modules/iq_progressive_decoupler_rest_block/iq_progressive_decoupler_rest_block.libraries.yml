@@ -2,5 +2,4 @@ rest-block:
   version: VERSION
   js:
     resources/js/init-rest-block.js: {}
-  dependencies:
-    - iq_progressive_decoupler/frontend-rendering
+

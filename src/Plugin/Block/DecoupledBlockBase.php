@@ -2,14 +2,14 @@
 
 namespace Drupal\iq_progressive_decoupler\Plugin\Block;
 
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Component\Serialization\Yaml as YamlSerializer;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\ui_patterns\UiPatternsManager;
-use Drupal\Component\Serialization\Yaml;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml as YamlParser;
-use Drupal\Component\Serialization\Yaml as YamlSerializer;
 
 /**
  * Base block for decoupling.
