@@ -1,4 +1,3 @@
 rest-block:
   js:
     resources/js/init-rest-block.js: {}
-
